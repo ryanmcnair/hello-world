@@ -35,21 +35,6 @@ namespace HelloWorld
 
             Console.WriteLine($"Would you like a {colorInput} {animals[index]}?");
 
-            var input1 = "abcd";
-            var counter = 1;
-            string output = string.Empty;
-
-            foreach (var item in input1)
-            {
-                for (int i = 0; i < counter; i++)
-                {
-                    var x = Char.ToUpper(item);
-                    output += x;
-                }
-                counter++;
-                output += "-";
-            }
-
             var stringThing = new StringBuilder();
             Console.WriteLine("Please enter 4 random letters");
             var randomLetters = Console.ReadLine();
