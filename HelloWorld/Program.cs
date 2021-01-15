@@ -8,6 +8,28 @@ namespace HelloWorld
         static void Main(string[] args)
         {
             //Validator
+            //Phone Number
+
+            //PIN Number
+            Console.WriteLine("Please enter a PIN code between 4 and 8 digits");
+            int pinNumber;
+            string pinNumberInput = Console.ReadLine();
+            if (!int.TryParse(pinNumberInput, out pinNumber))
+            {
+                Console.WriteLine("Number values only");
+            }
+            else if (pinNumber < 1000)
+            {
+                Console.WriteLine("Too short");
+            }
+            else if (pinNumber > 99999999)
+            {
+                Console.WriteLine("Too long");
+            }
+            else
+            {
+                Console.WriteLine("Your PIN Number is recorded");
+            }
             //Mask Sensitive Information
             Console.WriteLine("Please enter a password that is 6 or more characters:");
             string sensitiveInfoToMask = null;
@@ -54,16 +76,30 @@ namespace HelloWorld
             Console.WriteLine("Please input 3 numbers like this: 1,2,3");
             var numberInput = Console.ReadLine();
             var numberSplit = numberInput.Split(",");
+            var a = 0;
+            var b = 0;
+            var c = 0;
+            var counter = 0;
             foreach (var number in numberSplit)
             {
                 int stringToNumber = Int32.Parse(number);
-                Console.WriteLine($"number: {stringToNumber}");
+
+                if (counter == 0)
+                {
+                    a += stringToNumber;
+                    counter++;
+                }
+                else if (counter == 1)
+                {
+                    b += stringToNumber;
+                    counter++;
+                }
+                else if (counter == 2)
+                {
+                    c += stringToNumber;
+                    counter++;
+                }
             }
-          
-            var a = 1;
-            var b = 4;
-            var c = 5;
-            var average = a + b + c / 3;
 
             if (calculatorInput == "multiply")
             {
@@ -79,6 +115,11 @@ namespace HelloWorld
             {
                 var add = $"Your numbers added together total  {a + b + c}";
                 Console.WriteLine(add);
+            }
+            else if (calculatorInput == "average")
+            {
+                var average = $"The average of your numbers is {a + b + c / 3}";
+                Console.WriteLine(average);
             }
 
             //Hello World & Console Input
