@@ -7,8 +7,97 @@ namespace HelloWorld
     {
         static void Main(string[] args)
         {
+            //Mask Sensitive Information
+            Console.WriteLine("Please enter a password that is 6 or more characters:");
+            string sensitiveInfoToMask = null;
+            while (true)
+            {
+                var key = System.Console.ReadKey(true);
+                if (key.Key == ConsoleKey.Enter)
+                    break;
+                sensitiveInfoToMask += key.KeyChar;
+            }
+            if (sensitiveInfoToMask.Length > 4)
+            {
+                string lastFour = sensitiveInfoToMask.Substring(sensitiveInfoToMask.Length - 4);
+                Console.WriteLine($"The last four characters of your password are: {lastFour}");
+            }
+            else
+            {
+                Console.WriteLine("Not long enough.");
+                Console.WriteLine("Please enter a password that is 6 or more characters:");
+                string newSensitiveInfoToMask = null;
+                while (true)
+                {
+                    var key = System.Console.ReadKey(true);
+                    if (key.Key == ConsoleKey.Enter)
+                        break;
+                    newSensitiveInfoToMask += key.KeyChar;
+                }
+                if (newSensitiveInfoToMask.Length > 4)
+                {
+                    string lastFour = newSensitiveInfoToMask.Substring(newSensitiveInfoToMask.Length - 4);
+                    Console.WriteLine($"The last four digits of your password are: {lastFour}");
+                }
+                else
+                {
+                    Console.WriteLine("Nope. I quit.");
+                }
+            }
             //Validator
+            //Email Validator
+            Console.WriteLine("Please enter a valid email address");
+            var emailInput = Console.ReadLine();
+            char[] emailCharacters = emailInput.ToCharArray();
+            int atCount = 0;
+            int dotCount = 0;
+
+            foreach (var ch in emailCharacters)
+            {
+                if (ch == '@')
+                {
+                    atCount++;
+                }
+                else if (ch == '.')
+                {
+                    dotCount++;
+                }
+            }
+            if (atCount > 1 || dotCount < 1)
+            {
+                Console.WriteLine("Not a valid email address");
+            }
+            else
+            {
+                Console.WriteLine("Your email address is valid");
+            }
+
             //Phone Number
+            Console.WriteLine("Please enter your phone number, including area code");
+            var phoneNumberInput = Console.ReadLine();
+            var removeCharacters = string.Join("", phoneNumberInput.Split('(', ')', '-', '.', ' '));
+            string checkForFives = removeCharacters.Substring(0, 2);
+            //int stringToNumbers = Int32.Parse(removeCharacters);
+            var checkForDigits = Char.IsDigit(removeCharacters, 10);
+
+            if (phoneNumberInput.Length > 13 || phoneNumberInput.Length < 10)
+            {
+                Console.WriteLine("Not a valid number");
+            }
+            else if (checkForFives.Contains("555"))
+            {
+                Console.WriteLine("Not a valid number");
+            }
+            else if (checkForDigits == false)
+            {
+                Console.WriteLine("Not a valid number");
+            }
+            else
+            {
+                Console.WriteLine($"Your number is ");
+            }
+
+
 
             //PIN Number
             Console.WriteLine("Please enter a PIN code between 4 and 8 digits");
@@ -30,45 +119,7 @@ namespace HelloWorld
             {
                 Console.WriteLine("Your PIN Number is recorded");
             }
-            //Mask Sensitive Information
-            Console.WriteLine("Please enter a password that is 6 or more characters:");
-            string sensitiveInfoToMask = null;
-            while (true)
-            {
-                var key = System.Console.ReadKey(true);
-                if (key.Key == ConsoleKey.Enter)
-                    break;
-                sensitiveInfoToMask += key.KeyChar;
-            }
-            if (sensitiveInfoToMask.Length > 4)
-            {
-                string lastFour = sensitiveInfoToMask.Substring(sensitiveInfoToMask.Length - 4);
-                Console.WriteLine($"The last four digits of your password are: {lastFour}");
-            }
-            else
-            {
-                Console.WriteLine("Not long enough dummy. Can't you count?");
-                Console.WriteLine("Please enter a password that is 6 or more characters:");
-                string newSensitiveInfoToMask = null;
-                while (true)
-                {
-                    var key = System.Console.ReadKey(true);
-                    if (key.Key == ConsoleKey.Enter)
-                        break;
-                    newSensitiveInfoToMask += key.KeyChar;
-                }
-                if (newSensitiveInfoToMask.Length > 4)
-                {
-                    string lastFour = newSensitiveInfoToMask.Substring(newSensitiveInfoToMask.Length - 4);
-                    Console.WriteLine($"The last four digits of your password are: {lastFour}");
-                }
-                else
-                {
-                    Console.WriteLine("Go back to kindergarten. I quit.");
-                }
-            }
             
-
 
             //Calculator Exercise
             Console.WriteLine("Do you want to add, multiply, square or average?");
@@ -156,7 +207,7 @@ namespace HelloWorld
             Console.WriteLine("Please enter 4 random letters");
             var randomLetters = Console.ReadLine();
 
-           for (int x = 0; x < randomLetters.Length; x++)
+            for (int x = 0; x < randomLetters.Length; x++)
             {
                 stringThing.Append(Char.ToUpper(randomLetters[x]));
                 for (int y = 0; y < x; y++)
@@ -166,7 +217,7 @@ namespace HelloWorld
                 if (x != randomLetters.Length - 1) stringThing.Append("-");
             }
 
-            Console.WriteLine(stringThing);  
+            Console.WriteLine(stringThing);
         }
     }
 }
